@@ -27,4 +27,15 @@ bcm14 - Uart RX
 bcm15 - Uart TX
 
 
+bcm17 - TP_IRQ
+bcm24 - LCD_RS	
+bcm10 - LCD_SI / TP_SI	
+bcm9 - TP_SO	
+bcm25 - RST	
+bcm11 - LCD_SCK / TP_SCK	
+bcm8 - LCD_CS	
+bcm7 - TP_CS	
+
 -> Connected: INMP441, MAX98357A , OV5640 , Display
+
+

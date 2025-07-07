@@ -95,3 +95,5 @@ fb[h//2:, w//2:] = [0,255,0,255]
 ```
 
 Rewriting robot eyes to fit framebuffer
+
+Need to implement swipe gestures and distance detection in sensor
