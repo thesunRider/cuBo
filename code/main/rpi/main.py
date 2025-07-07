@@ -75,11 +75,6 @@ robo.curious = True  # bool on/off -> when turned on, height of the outer eyes i
 # Send command
 ser.write(b'sm;s1:-1000;s2:-1000\n')  # Send as bytes, add newline if Arduino expects it
 
-
-
-# Close the port
-#
-
 send_interval = 3  # seconds
 last_send_time =  time.perf_counter()
 
@@ -87,9 +82,9 @@ try:
 	while True:
 		current_time = time.perf_counter()
 		if current_time - last_send_time >= send_interval:
+			last_send_time = current_time
 			ser.reset_input_buffer()
 			ser.write(b'swa;\n')
-			last_send_time = current_time
 			time.sleep((1/fps_screen)/1.5)
 			# Check for incoming data
 			response = ser.readline().decode().strip()
@@ -107,6 +102,9 @@ try:
 		robo.update()  
 		time.sleep((1/fps_screen)/1.5) #set refresh rate slightly below fps of screen
 
+except KeyboardInterrupt:
+	print("Keyboard interrupt caught. Exiting gracefully...")
+	ser.close()
 except Exception as e:
-	print("Closing serial")
+	print(f"An error occurred: {e}")
 	ser.close()
