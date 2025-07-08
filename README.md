@@ -1,268 +1,232 @@
-Cubo Project
-Overview
-Cubo is an autonomous, interactive companion robot designed for modern homes, built on a Raspberry Pi Zero 2 W running Raspberry Pi OS Bullseye Lite. Developed by Leena Kashyap and Suryasaradhi Balarkan, Cubo combines affordable hardware with open-source AI to provide video streaming, expressive display animations (e.g., robotic eyes), audio interaction, and sensor-based controls. It serves as a home automation hub, elderly care companion, educational assistant, and mobile surveillance system, requiring minimal user management. Cubo responds to touch and voice inputs with emotional expressions, making it engaging and relatable.
-Purpose
-Cubo addresses key challenges in smart home technology:
+# cuBo
 
-Limited Interaction: Unlike static assistants (e.g., Alexa, Google Home), Cubo offers emotional and physical interactions via animations and mobility.
-Elderly Care: Provides companionship, reminders, and emergency support for seniors.
-Affordability: Uses low-cost components like the Raspberry Pi Zero 2 W to make robotics accessible.
-Unified Automation: Acts as a central hub for smart devices, schedules, and communication.
+### Autonomous Companion Robot for Modern Homes
 
-Features
+**cuBo** is an open-source, interactive, autonomous companion robot designed for modern homes, running on a Raspberry Pi Zero 2 W with Raspberry Pi OS Bullseye Lite. Developed by **Leena Kashyap** and **Suryasaradhi Balarkan**, cuBo blends affordable hardware with AI-based software to deliver:
 
-Video Streaming: Streams 1920x1080 video at 30 FPS using libcamera-vid and ffmpeg over UDP for remote viewing, face tracking, and object detection.
-Display: Renders expressive "RoboEyes" animations on a 3.5" SPI LCD via framebuffer (/dev/fb0).
-Audio: Supports voice input (INMP411 microphone with Whisper/VOSK) and output (MAX98357A speaker via I2S).
-Mobility: Uses 28BYJ-48 stepper motors for head or wheel movement, controlled by an Arduino Micro.
-Sensors: Integrates a QMC5883P compass for orientation, VL53L3CX TOF sensor for distance detection, and touch sensors for gesture interaction (e.g., petting).
-Automation: Manages smart devices and schedules via a Flask server, with self-charging and connectivity features.
+* Video streaming
+* Expressive robotic eye animations
+* Voice interaction
+* Sensor-based gesture control
+* Mobility
 
-Hardware Components
+cuBo functions as a home automation hub, elderly care companion, educational assistant, and mobile surveillance system, requiring minimal user management. It reacts to touch and voice with emotional expressions, making it an engaging and relatable companion.
 
+---
 
+## 🎯 Purpose
 
-Component
-Function
+cuBo addresses key challenges in smart home robotics:
 
+* **Emotional Interaction**: Unlike static assistants (e.g., Alexa, Google Home), cuBo offers physical movement and expressive animations.
+* **Elderly Care**: Provides companionship, reminders, and emergency alerts for seniors.
+* **Affordability**: Uses low-cost components to make personal robotics accessible.
+* **Unified Automation**: Acts as a central hub for smart devices, schedules, and communication.
 
+---
 
-Raspberry Pi Zero 2 W
-Main processing for AI, camera, audio, UI, and control logic
+## 🚀 Features
 
+* **Video Streaming:** 1080p30 video over UDP with `libcamera-vid` + `ffmpeg` for face/object tracking.
+* **Display:** Robotic “RoboEyes” animations on a 3.5” SPI LCD (`/dev/fb0` framebuffer).
+* **Audio:** Speech recognition (VOSK/Whisper) and audio playback via I2S.
+* **Mobility:** 28BYJ-48 stepper motors for movement (head/wheel), controlled via Arduino Micro.
+* **Sensors:** Compass (QMC5883P), TOF sensor (VL53L3CX), touch sensors for gesture input.
+* **Automation:** Flask server for smart device control, scheduling, and remote access.
 
-Arduino Micro
-Real-time control for motors and sensors
+---
 
+## Demo Video 
+The below is Unfinished first cuBo prototype
 
-OV5640 Camera
-Video capture for streaming and detection
 
+https://github.com/user-attachments/assets/90a2a3a3-cf43-4fe5-9dd7-d7a50253ca3a
 
-INMP411 Microphone
-Voice input for speech recognition
 
 
-3.5" SPI LCD
-Displays UI (e.g., robotic eyes, alerts)
 
+## 🧰 Hardware Components
 
-Touch Sensor
-Detects user interactions (petting, taps)
+| Component               | Function                                   |
+| ----------------------- | ------------------------------------------ |
+| Raspberry Pi Zero 2 W   | Main processor (AI, video, audio, control) |
+| Arduino Micro           | Motor and sensor control                   |
+| OV5640 Camera           | Video streaming & object detection         |
+| INMP411 Microphone      | Voice input                                |
+| 3.5" SPI LCD            | Display animations/UI                      |
+| MAX98357A Speaker       | Audio output                               |
+| Touch Sensor            | Gesture/touch detection                    |
+| 28BYJ-48 Stepper Motors | Movement (head/wheels)                     |
+| ULN2003 Driver Board    | Stepper motor driver                       |
+| VL53L3CX TOF Sensor     | Distance measurement (obstacle detection)  |
+| QMC5883P Compass        | Orientation detection                      |
+| 3.7V Li-ion Battery     | Power source                               |
+| TP4056 Module           | Battery charging & protection              |
+| 5V Boost Converter      | 5V regulated power                         |
+| Flask Server (via WiFi) | Remote control and streaming backend       |
 
+---
 
-MAX98357A Speaker
-Audio output for responses and alerts
+## 💾 Software Stack
 
+### Raspberry Pi
 
-28BYJ-48 Stepper Motors
-Drives head or wheel movement
+* **OS:** Raspberry Pi OS Bullseye Lite
+* **Languages:** Python, C++
+* **Frameworks:**
 
+  * ROS (sensor & navigation control)
+  * Flask (web interface & automation)
+  * ORB-SLAM (planned for future navigation)
+* **AI:**
 
-ULN2003 Driver Board
-Powers and controls stepper motors
+  * VOSK/Whisper for speech recognition
+  * Ollama (planned for advanced AI chat)
+* **Libraries:** `numpy`, `pyserial`, `picamera`, `libcamera-apps`, `ffmpeg`, `U8glib`, `PIGPIO`
+* **Networking:** WiFi (video streaming, remote server)
 
+### Arduino
 
-VL53L3CX TOF Sensor
-Measures distance for obstacle detection
+* **Libraries:** `TinyStepper_28BYJ_48`, `ezButton`, `Wire`
+* **Functions:** Motor & sensor control, UART bridge for Pi communication
 
+### Design Tools
 
-QMC5883P Compass (HW-246 GY-271)
-Detects orientation for navigation
+* **Fusion 360:** CAD modeling
+* **KiCad:** PCB design
+* **Flutter:** Mobile App (optional)
 
+---
 
-3.7V Li-ion Battery
-Main power source
+## ⚙️ Setup Instructions
 
+### 1. Raspberry Pi Configuration
 
-TP4056 Charging Module
-Manages battery charging and protection
+* Install Raspberry Pi OS Bullseye Lite
+* Network Setup:
 
+  ```bash
+  nmap -p 22 --open -sV <subnet>.0/24  # Scan
+  ping <ip>                            # Test
+  ```
+* Enable mDNS:
 
-5V Boost Converter
-Provides stable 5V for components
+  ```bash
+  sudo apt update
+  sudo apt install avahi-daemon
+  sudo systemctl enable avahi-daemon
+  sudo systemctl start avahi-daemon
+  sudo raspi-config  # Set hostname
+  ping <hostname>.local
+  ```
 
+### 2. Camera & Streaming
 
-Flask PC (via WiFi)
-Remote server for web interface and communication
+* Enable camera (`raspi-config` + `/boot/config.txt`)
+* Install tools:
 
+  ```bash
+  sudo apt install ffmpeg libcamera-apps tio
+  ```
+* Stream Video:
 
-Software Stack
+  ```bash
+  libcamera-vid -t 0 -g 10 --bitrate 4500000 --inline --width 1920 --height 1080 --framerate 30 --rotation 180 --codec libav --libav-format h264 --av-sync 200000 -n -o udp://<receiver-ip>:1234
+  ```
+* View Stream:
 
-Raspberry Pi:
-OS: Raspberry Pi OS Bullseye Lite.
-Languages: Python (AI, backend), C++ (sensor control).
-Frameworks:
-ROS: Sensor and navigation control.
-Flask: Web interface and remote control.
-ORBSLAM: Planned for navigation (future).
+  ```bash
+  ffplay -fflags nobuffer -flags low_delay -framedrop udp://<receiver-ip>:1234
+  ```
 
+### 3. Audio Setup
 
-AI:
-Whisper/VOSK: Speech recognition for voice commands.
-Ollama: Prompt-based AI (planned ChatGPT integration).
+* Enable I2S in `/boot/config.txt`:
 
+  ```bash
+  dtparam=i2s=on
+  dtoverlay=googlevoicehat-soundcard
+  ```
+* Test Audio:
 
-Libraries: numpy, pyserial, picamera, libcamera-apps, ffmpeg, U8glib, PIGPIO.
-Networking: WiFi for streaming and server communication.
+  ```bash
+  aplay -l
+  speaker-test
+  arecord -d 5 test.wav
+  aplay test.wav
+  ```
 
+### 4. Display Setup
 
-Arduino:
-Libraries: TinyStepper_28BYJ_48, ezButton, Wire.
-Custom Code: Manages compass, motors, and touch sensors via UART.
+* Connect 3.5" SPI LCD (via guide)
+* Framebuffer Test:
 
+  ```python
+  import numpy as np
+  fb = np.memmap('/dev/fb0', dtype='uint8', mode='w+', shape=(1024, 1280, 4))
+  fb[:] = [255, 0, 0, 255]  # Blue screen
+  ```
 
-Design Tools:
-Fusion 360: CAD modeling.
-KiCad: PCB design.
-Flutter: Minimal Android app.
+### 5. Sensor & Motor Control
 
+* Upload Arduino code for stepper motors, buttons, compass, UART.
+* Serial communication via `/dev/ttyS0` or `/dev/ttyUSB0`.
+* Command Format:
 
+  * `sm` (motor control), `swa` (button input), `cmps` (compass data).
 
-Setup Instructions
-1. Raspberry Pi Configuration
+### 6. RoboEyes Animation
 
-OS: Install Raspberry Pi OS Bullseye Lite.
-Network:
-Scan for Pi:nmap -p 22 --open -sV <subnet>.0/24
-ping <scanned-ip>
+* Expressive eye animations at 7 FPS:
 
+  ```python
+  robo = RoboEyes(lcd, 480, 320, frame_rate=7, on_show=robo_show)
+  robo.set_auto_blinker(True, 4, 2)
+  robo.set_idle_mode(True, 5, 2)
+  robo.mood = DEFAULT
+  robo.curious = True
+  ```
 
-Enable mDNS:sudo apt update
-sudo apt install avahi-daemon
-sudo systemctl enable avahi-daemon
-sudo systemctl start avahi-daemon
-sudo raspi-config # Set hostname
-ping <hostname>.local
+---
 
+## 🛠️ Implementation
 
-Install Bonjour on Windows for mDNS resolution.
+* **Design:** Modeled in Fusion 360 with multiple design iterations.
+* **Hardware:** Integrated stepper motors, sensors, audio, display.
+* **Software:**
 
+  * Python: AI, video, audio, LCD, server
+  * Arduino: Motor & sensor control
+  * Flask: Web interface & remote control
+* **Testing:** Verified video streaming, sensor inputs, and animations.
 
+---
 
-2. Camera and Streaming
+## 🏠 Use Cases
 
-Enable camera in /boot/config.txt and raspi-config.
-Install tools:sudo apt install ffmpeg -y
-sudo apt install libcamera-apps
-sudo apt-get install tio
+* **Home Automation:** Control smart devices and routines.
+* **Elderly Care:** Provide companionship, reminders, and emergency alerts.
+* **Education:** Engage children with learning tools.
+* **Surveillance:** Mobile camera for security monitoring.
+* **Ambient:** Display info, play music, and show notifications.
 
+---
 
-Stream video:libcamera-vid -t 0 -g 10 --bitrate 4500000 --inline --width 1920 --height 1080 --framerate 30 --rotation 180 --codec libav --libav-format h264 --av-sync 200000 -n -o udp://<receiver-ip>:1234
+## 🔮 Future Plans
 
+* Integrate ORB-SLAM for autonomous navigation.
+* Develop IoT backend for device integrations.
+* Enhance AI with Whisper or ChatGPT.
+* Integrate popular apps (Skype, WhatsApp).
+* Connect to Google IoT for alarms and calendars.
+* Add native language speech support.
+* Design compact PCB for space optimization.
+* Upgrade mechanical design with faster motors.
+* Improve gesture recognition accuracy.
 
-Play stream:ffplay -fflags nobuffer -flags low_delay -framedrop udp://<receiver-ip>:1234
+## 📄 License
 
-
-Autostart: Follow WiFi Camera Guide.
-
-3. Audio Setup
-
-Configure I2S in /boot/config.txt:dtparam=i2s=on
-dtoverlay=googlevoicehat-soundcard
-
-
-Test audio:aplay -l
-speaker-test
-arecord -d 5 test.wav
-aplay test.wav
-
-
-
-4. Display Setup
-
-Connect 3.5" SPI LCD (guide).
-Render to framebuffer:import numpy as np
-h, w, c = 1024, 1280, 4
-fb = np.memmap('/dev/fb0', dtype='uint8', mode='w+', shape=(h,w,c))
-fb[:] = [255,0,0,255] # Blue screen
-
-
-
-5. Sensor and Motor Control
-
-Arduino:
-Connect stepper motors, buttons (SW1–SW4), and QMC5883P compass.
-Upload Arduino code for motor, sensor, and UART handling.
-
-
-Serial Communication:
-Uses /dev/ttyS0 or /dev/ttyUSB0.
-Commands: sm;s1:<value>;s2:<value> (motors), swa (buttons), cmps (compass).
-
-
-Gestures:
-Buttons increment activityCount (threshold: 20 in 5 seconds) to trigger actions (e.g., HAPPY mood).
-
-
-
-6. RoboEyes Animation
-
-Displays expressive eyes on LCD:
-Configurable: size, spacing, mood (e.g., HAPPY, DEFAULT), animations (blink, wink).
-Features: Curiosity mode, flickering, prebuilt animations.
-Updates at 7 FPS:robo = RoboEyes(lcd, 480, 320, frame_rate=7, on_show=robo_show)
-robo.set_auto_blinker(True, 4, 2)
-robo.set_idle_mode(True, 5, 2)
-robo.mood = DEFAULT
-robo.curious = True
-
-
-
-
-
-Implementation
-
-Design: CAD modeled in Fusion 360 with multiple revisions.
-Assembly: Integrated hardware, addressing wiring complexity.
-Software:
-Python: Camera, mic, LCD, AI (Whisper/VOSK, Ollama).
-Arduino: Motors, sensors, UART bridge.
-Flask: Remote control and streaming.
-
-
-Testing: Verified streaming, inputs, and animations.
-
-Setbacks and Learnings
-
-Challenges:
-Component sourcing delays; built custom libraries.
-Boost converter overheating and wiring issues.
-I2C/SPI conflicts and logic level mismatches.
-Whisper too slow; switched to VOSK.
-Power consumption caused resets.
-
-
-Learnings:
-Modularize subsystems for testing.
-Prioritize power planning.
-Built custom level shifters.
-
-
-
-Use Cases
-
-Home Automation: Controls smart devices and schedules.
-Elderly Care: Offers companionship, reminders, and alerts.
-Education: Engages children with interactive learning.
-Surveillance: Mobile camera for security.
-Ambient: Plays music, displays calendar events.
-
-Future Scope
-
-Implement ORBSLAM for navigation.
-Develop IoT backend for device integration.
-Upgrade to Whisper or ChatGPT for AI.
-Integrate apps (Skype, WhatsApp).
-Connect to Google IoT for alarms and calendars.
-Add native language speech recognition.
-Design PCB for compact electronics.
-Refine mechanical design and use faster motors.
-Enhance gesture detection.
-
-Repository
-
-GitHub - thesunRider/cuBo
-
-License
 MIT License
+
+---
+
