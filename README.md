@@ -1,5 +1,5 @@
 # cuBo
-
+![Description](./assets/1690047346559.png)
 ### Autonomous Companion Robot for Modern Homes
 
 **cuBo** is an open-source, interactive, autonomous companion robot designed for modern homes, running on a Raspberry Pi Zero 2 W with Raspberry Pi OS Bullseye Lite. Developed by **Leena Kashyap** and **Suryasaradhi Balarkan**, cuBo blends affordable hardware with AI-based software to deliver:
@@ -12,6 +12,7 @@
 
 cuBo functions as a home automation hub, elderly care companion, educational assistant, and mobile surveillance system, requiring minimal user management. It reacts to touch and voice with emotional expressions, making it an engaging and relatable companion.
 
+For setting up cubo : read implementations.md
 ---
 
 ## 🎯 Purpose
